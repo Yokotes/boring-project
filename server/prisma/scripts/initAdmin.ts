@@ -1,0 +1,21 @@
+import { prisma } from "../client";
+
+async function main() {
+  await prisma.user.create({
+    data: {
+      name: "admin",
+      password: "admin",
+    },
+  });
+  console.log("Admin was created");
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });

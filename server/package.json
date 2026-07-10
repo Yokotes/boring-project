@@ -5,19 +5,28 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "init_scripts": "tsx ./prisma/scripts/initAdmin",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/body-parser": "^1.19.6",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.1.1",
+    "dotenv": "^17.4.2",
+    "prisma": "^6.19.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.0",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vite-plugin-node": "^5.0.1"
   },
   "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.8.0",
+    "@prisma/client": "^6.19.3",
     "body-parser": "^2.3.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
