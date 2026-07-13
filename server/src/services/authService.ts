@@ -8,8 +8,19 @@ export const authUser = async (user: { login: string; password: string }) => {
   });
 
   // TODO: Encrypt password later
-  if (found?.name === user.login && found?.password === user.password)
-    return true;
+  if (found?.password === user.password) return true;
+
+  return false;
+};
+
+export const checkAuth = async (name: string) => {
+  const found = await prisma.user.findFirst({
+    where: {
+      name: name,
+    },
+  });
+
+  if (found) return found.name;
 
   return false;
 };
