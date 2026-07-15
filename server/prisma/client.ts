@@ -7,8 +7,6 @@ import path from "path";
 const rawPath = (process.env.DATABASE_URL ?? "").replace(/^file:/, "");
 const connectionString = path.join(process.cwd(), "prisma", rawPath);
 
-console.log(connectionString);
-
 const adapter = new PrismaBetterSqlite3({ url: connectionString });
 const prisma = new PrismaClient({ adapter });
 
