@@ -1,10 +1,12 @@
 import type { FC } from "react";
 import { useForm } from "react-hook-form";
-import styles from "./LoginContainer.module.scss";
-import { useAuthMutation } from "@/app/apis";
-import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useDispatch } from "react-redux";
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { useAuthMutation } from "@/app/apis";
 import { setPage, setUser } from "@/app/slices";
+import { Button } from "@/components/Button";
+import { TextField } from "@/components/TextField";
+import styles from "./LoginContainer.module.scss";
 
 interface LoginFormFields {
   login: string;
@@ -32,20 +34,21 @@ export const LoginContainer: FC = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Sign In</h2>
+      <h2 className={styles.title}>Авторизация</h2>
       <div className={styles.formWrapper}>
         <form className={styles.form} onSubmit={handleSubmit(submit)}>
-          <input
-            type="text"
-            placeholder="Login"
+          <TextField
+            placeholder="Логин"
             {...register("login", { required: true })}
           />
-          <input
+          <TextField
             type="password"
-            placeholder="Password"
+            placeholder="Пароль"
             {...register("password", { required: true })}
           />
-          <button>Sign In</button>
+          <div className={styles.buttonContainer}>
+            <Button>Войти</Button>
+          </div>
         </form>
       </div>
     </div>

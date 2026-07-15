@@ -1,0 +1,32 @@
+.navItem {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+}
+
+.active {
+  background: rgba(14, 165, 233, 0.1);
+  color: var(--color-primary);
+
+  &:hover {
+    background: rgba(14, 165, 233, 0.14);
+    color: var(--color-primary);
+  }
+}

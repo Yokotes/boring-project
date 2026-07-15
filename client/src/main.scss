@@ -3,3 +3,33 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --color-primary: #0ea5e9;
+  --color-primary-hover: #0284c7;
+  --color-secondary: #14b8a6;
+  --color-secondary-hover: #0d9488;
+
+  --color-bg: #f4f9fb;
+  --color-surface: #ffffff;
+
+  --color-text: #1e293b;
+  --color-muted: #64748b;
+
+  --color-border: #e2e8f0;
+
+  --font-heading: "Unbounded", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}

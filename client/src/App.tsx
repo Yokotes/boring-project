@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, type JSX } from "react";
 import { LoginPage } from "@/pages/LoginPage";
-import { AppPage } from "@/pages/AppPage";
+import { HomePage } from "@/pages/HomePage";
 import type { Page } from "@/app/types";
 import { currentPageSelector } from "@/app/selectors";
 import { useLazyCheckAuthQuery } from "@/app/apis";
@@ -9,19 +9,19 @@ import { setPage, setUser } from "@/app/slices";
 
 const PAGES: Record<Page, JSX.Element> = {
   login: <LoginPage />,
-  app: <AppPage />,
+  home: <HomePage />,
 };
 
 const App = () => {
   const currentPage = useSelector(currentPageSelector);
-  const [checkAuth, { isLoading }] = useLazyCheckAuthQuery();
+  const [checkAuth] = useLazyCheckAuthQuery();
   const dispatch = useDispatch();
 
   useEffect(() => {
     checkAuth()
       .unwrap()
       .then(({ user }) => {
-        dispatch(setPage("app"));
+        dispatch(setPage("home"));
         dispatch(setUser(user));
       })
       // TODO: Change later
@@ -30,8 +30,8 @@ const App = () => {
 
   const pageComponent = PAGES[currentPage];
 
-  // TODO: Add fancy loader
-  return <>{isLoading ? "Loading..." : pageComponent}</>;
+  // TODO: Maybe add fancy loader
+  return <>{pageComponent}</>;
 };
 
 export default App;
