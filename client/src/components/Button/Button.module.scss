@@ -9,6 +9,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s ease;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .primary {

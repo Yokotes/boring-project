@@ -1,15 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, type JSX } from "react";
-import { LoginPage } from "@/pages/LoginPage";
-import { HomePage } from "@/pages/HomePage";
 import type { Page } from "@/app/types";
 import { currentPageSelector } from "@/app/selectors";
 import { useLazyCheckAuthQuery } from "@/app/apis";
 import { setPage, setUser } from "@/app/slices";
+import { LoginPage } from "@/pages/LoginPage";
+import { HomePage } from "@/pages/HomePage";
+import { ExercisesPage } from "@/pages/ExercisesPage";
+import { SchedulesPage } from "@/pages/SchedulesPage";
 
 const PAGES: Record<Page, JSX.Element> = {
   login: <LoginPage />,
   home: <HomePage />,
+  exercises: <ExercisesPage />,
+  schedules: <SchedulesPage />,
 };
 
 const App = () => {

@@ -1,14 +1,16 @@
-import type { ComponentPropsWithoutRef, FC, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, FC, JSX, ReactNode } from "react";
 import styles from "./Button.module.scss";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
   children: ReactNode;
   variant?: "primary" | "secondary";
+  startIcon?: JSX.Element;
 }
 
 export const Button: FC<Props> = ({
   children,
   className,
+  startIcon,
   variant = "primary",
   ...otherProps
 }) => {
@@ -17,7 +19,10 @@ export const Button: FC<Props> = ({
       {...otherProps}
       className={`${styles.button} ${styles[variant]} ${className ?? ""}`}
     >
-      {children}
+      <>
+        {startIcon}
+        {children}
+      </>
     </button>
   );
 };
