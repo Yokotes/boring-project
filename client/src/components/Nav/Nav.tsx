@@ -1,9 +1,8 @@
 import { useMemo, type FC } from "react";
 import { NavItem } from "../NavItem";
-import { useSelector } from "react-redux";
 import type { Page } from "@/app/types";
-import { currentPageSelector } from "@/app/selectors";
 import styles from "./Nav.module.scss";
+import { useRouter } from "@/pages/Router";
 
 export interface NavItem {
   title: string;
@@ -15,10 +14,10 @@ interface Props {
 }
 
 export const Nav: FC<Props> = ({ items }) => {
-  const currentPage = useSelector(currentPageSelector);
+  const { page } = useRouter();
   const activeItem = useMemo(
-    () => items.find((item) => item.page === currentPage),
-    [currentPage, items],
+    () => items.find((item) => item.page === page),
+    [page, items],
   );
 
   return (

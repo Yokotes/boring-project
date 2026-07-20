@@ -7,15 +7,15 @@ import styles from "./PageLayout.module.scss";
 const NAV_ITEMS: NavItem[] = [
   {
     title: "Главная",
-    page: "home",
+    page: "/home",
   },
   {
     title: "Расписания",
-    page: "schedules",
+    page: "/schedules",
   },
   {
     title: "Упражнения",
-    page: "exercises",
+    page: "/exercises",
   },
 ];
 

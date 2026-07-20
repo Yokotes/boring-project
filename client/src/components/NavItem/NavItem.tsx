@@ -1,8 +1,7 @@
 import { useMemo, type FC } from "react";
 import type { Page } from "@/app/types";
 import styles from "./NavItem.module.scss";
-import { useDispatch } from "react-redux";
-import { setPage } from "@/app/slices";
+import { useRouter } from "@/pages/Router";
 
 export interface NavItemProps {
   title: string;
@@ -11,16 +10,16 @@ export interface NavItemProps {
 }
 
 export const NavItem: FC<NavItemProps> = ({ title, page, active }) => {
+  const { setPage } = useRouter();
   const className = useMemo(
     () => `${styles.navItem} ${active ? styles.active : ""}`,
     [active],
   );
-  const dispatch = useDispatch();
 
   const handleGoToPage = () => {
     if (active) return;
 
-    dispatch(setPage(page));
+    setPage(page);
   };
 
   return (

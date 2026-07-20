@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useAuthMutation } from "@/app/apis";
-import { setPage, setUser } from "@/app/slices";
+import { setUser } from "@/app/slices";
 import { Button } from "@/components/Button";
 import { TextField } from "@/components/TextField";
 import styles from "./LoginContainer.module.scss";
+import { useRouter } from "@/pages/Router";
 
 interface LoginFormFields {
   login: string;
@@ -14,6 +15,7 @@ interface LoginFormFields {
 }
 
 export const LoginContainer: FC = () => {
+  const { setPage } = useRouter();
   const { register, handleSubmit } = useForm<LoginFormFields>({});
   const dispatch = useDispatch();
   const [auth] = useAuthMutation();
@@ -28,7 +30,7 @@ export const LoginContainer: FC = () => {
 
     if (data) {
       dispatch(setUser(data.user));
-      dispatch(setPage("app"));
+      setPage("/home");
     }
   };
 

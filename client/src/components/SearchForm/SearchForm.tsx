@@ -1,30 +1,39 @@
-import type { FC } from "react";
+import { useRef, type ChangeEventHandler, type FC } from "react";
+import { EMPTY_FUNCTION } from "@/consts";
 import { TextField } from "../TextField";
-import { Button } from "../Button";
 import styles from "./SearchForm.module.scss";
-import { useForm } from "react-hook-form";
 
-interface SearchFormFields {
-  search: string;
+const DEBOUNCE_TIME = 300;
+
+type SearchHandler = (val: string) => void;
+
+interface Props {
+  onSearch?: SearchHandler;
 }
 
-export const SearchForm: FC = () => {
-  const { register, handleSubmit } = useForm<SearchFormFields>({});
+export const SearchForm: FC<Props> = ({ onSearch = EMPTY_FUNCTION }) => {
+  // NOTE: To not lose value through rerenders
+  const timeoutId = useRef<number>(undefined);
 
-  const submit = (vals: SearchFormFields) => {
-    console.log(vals);
+  const handleDebouncedChange: ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    clearTimeout(timeoutId.current);
+
+    timeoutId.current = setTimeout(() => {
+      const val = event.target.value;
+
+      onSearch(val);
+    }, DEBOUNCE_TIME);
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(submit)}>
+    <div className={styles.form}>
       <TextField
         className={styles.input}
         placeholder="Поиск"
-        {...register("search", { required: true })}
+        onChange={handleDebouncedChange}
       />
-      <div>
-        <Button>Поиск</Button>
-      </div>
-    </form>
+    </div>
   );
 };
