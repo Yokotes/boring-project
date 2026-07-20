@@ -5,6 +5,7 @@ Fullstack app fit tracker that I'm working on while trying to get a job.
 ## How to run
 
 Go to `./server` and run in command line: `npm run dev`.
+
 Then go to `./client` and run: `npm run dev` too).
 
 Here it is!
