@@ -8,7 +8,7 @@
   box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
   border: 1px solid var(--color-border);
 
-  animation: form-slide 1s;
+  animation: slide 1s;
 }
 
 .title {
@@ -32,7 +32,7 @@
   }
 }
 
-@keyframes form-slide {
+@keyframes slide {
   from {
     transform: translateY(50px);
     opacity: 0;

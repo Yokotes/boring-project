@@ -2,9 +2,9 @@ import { useCallback, useState, type FC } from "react";
 import { PageLayout } from "@/components/PageLayout";
 import { SearchForm } from "@/components/SearchForm";
 import { ExerciseCard } from "@/components/ExerciseCard";
-import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import styles from "./ExercisesPage.module.scss";
+import { ButtonModal } from "@/components/ButtonModal";
 
 const EXERCISES_LIST_MOCK = [
   { name: "Тестовое упражнение" },
@@ -30,14 +30,19 @@ export const ExercisesPage: FC = () => {
       </div>
       <div className={styles.content}>
         <div className={styles.addBtnContainer}>
-          <Button startIcon={<Icon.Add />}>Добавить</Button>
+          <ButtonModal
+            startIcon={<Icon.Add />}
+            renderModalContent={() => <>Modal</>}
+          >
+            Добавить
+          </ButtonModal>
         </div>
         {exercises.length < 1 ? (
           <div className={styles.empty}>Упражнений не найдено</div>
         ) : (
           <div className={styles.cards}>
             {exercises.map((item) => (
-              <ExerciseCard key={item.name} name={item.name} />
+              <ExerciseCard key={item.name} title={item.name} />
             ))}
           </div>
         )}
