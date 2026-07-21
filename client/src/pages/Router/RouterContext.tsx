@@ -3,7 +3,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useState,
   type FC,
   type ReactNode,
@@ -19,22 +18,10 @@ const RouterContext = createContext<RouterContextValue | null>(null);
 export const RouterProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [page, setPage] = useState(document.location.pathname as Page);
 
-  const handlePopState = useCallback((event: Event) => {
-    alert(event);
-  }, []);
-
   const handleSetPage = useCallback((newPage: Page) => {
     history.pushState(null, "", newPage);
     setPage(newPage);
   }, []);
-
-  useEffect(() => {
-    window.addEventListener("popevent", handlePopState);
-
-    return () => {
-      window.removeEventListener("popevent", handlePopState);
-    };
-  }, [handlePopState]);
 
   return (
     <RouterContext.Provider value={{ page, setPage: handleSetPage }}>
