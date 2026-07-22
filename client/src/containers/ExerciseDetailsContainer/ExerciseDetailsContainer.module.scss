@@ -21,27 +21,6 @@
   display: block;
 }
 
-.deleteButton {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--color-danger);
-  cursor: pointer;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
-
-  &:hover {
-    background: var(--color-danger);
-    color: #fff;
-  }
-}
-
 .body {
   padding: 20px 0px 28px;
 }
@@ -49,9 +28,13 @@
 .title {
   margin-bottom: 10px;
   font-family: var(--font-heading);
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   color: var(--color-text);
+
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .description {

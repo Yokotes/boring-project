@@ -3,7 +3,7 @@ import styles from "./Button.module.scss";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
   children: ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "outlined";
   startIcon?: JSX.Element;
 }
 

@@ -3,8 +3,9 @@ import { PageLayout } from "@/components/PageLayout";
 import { SearchForm } from "@/components/SearchForm";
 import { ExerciseCard } from "@/components/ExerciseCard";
 import { Icon } from "@/components/Icon";
-import styles from "./ExercisesPage.module.scss";
 import { ButtonModal } from "@/components/ButtonModal";
+import { CreateExerciseContainer } from "@/containers/CreateExerciseContainer";
+import styles from "./ExercisesPage.module.scss";
 
 const EXERCISES_LIST_MOCK = [
   { name: "Тестовое упражнение" },
@@ -32,7 +33,10 @@ export const ExercisesPage: FC = () => {
         <div className={styles.addBtnContainer}>
           <ButtonModal
             startIcon={<Icon.Add />}
-            renderModalContent={() => <>Modal</>}
+            modalTitle="Добавить упражнение"
+            renderModalContent={(closeModal) => (
+              <CreateExerciseContainer onCancel={closeModal} />
+            )}
           >
             Добавить
           </ButtonModal>

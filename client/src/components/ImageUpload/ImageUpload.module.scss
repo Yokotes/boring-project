@@ -1,0 +1,74 @@
+.dropzone {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  border-radius: 10px;
+  border: 1.5px dashed var(--color-border);
+  background: var(--color-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+}
+
+.dragging {
+  border-color: var(--color-primary);
+  background: rgba(14, 165, 233, 0.06);
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  max-width: 220px;
+  line-height: 1.4;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-danger);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: var(--color-danger);
+    color: #fff;
+  }
+}

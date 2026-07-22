@@ -14,10 +14,6 @@ export const ExerciseDetailsContainer: FC<Props> = ({
   description,
   imageUrl,
 }) => {
-  const handleDelete = () => {
-    console.log("delete");
-  };
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.imageWrapper}>
@@ -26,15 +22,6 @@ export const ExerciseDetailsContainer: FC<Props> = ({
         ) : (
           <Icon.Dumbbell className={styles.image} />
         )}
-
-        {/* TODO: Maybe replace with Button component, add IconButton??? */}
-        <button
-          className={styles.deleteButton}
-          onClick={handleDelete}
-          title="Удалить"
-        >
-          <Icon.Trash />
-        </button>
       </div>
 
       <div className={styles.body}>

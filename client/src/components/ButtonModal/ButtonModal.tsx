@@ -6,11 +6,13 @@ type RenderButtonChildrenFn = (openModal: () => void) => ReactNode;
 
 interface Props extends Omit<ComponentProps<typeof Button>, "children"> {
   children: RenderButtonChildrenFn | ReactNode;
+  modalTitle?: string;
   renderModalContent: (closeModal: () => void) => ReactNode;
 }
 
 export const ButtonModal: FC<Props> = ({
   children,
+  modalTitle,
   renderModalContent,
   ...otherProps
 }) => {
@@ -28,7 +30,7 @@ export const ButtonModal: FC<Props> = ({
           {children}
         </Button>
       )}
-      <Modal isOpen={isOpen} onClose={closeModal}>
+      <Modal title={modalTitle} isOpen={isOpen} onClose={closeModal}>
         {renderModalContent(closeModal)}
       </Modal>
     </>

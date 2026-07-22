@@ -13,6 +13,7 @@ interface Props {
 export const ExerciseCard: FC<Props> = ({ title, imageUrl }) => {
   return (
     <ButtonModal
+      modalTitle="Просмотр упражнения"
       renderModalContent={() => (
         <ExerciseDetailsContainer
           title={title}
