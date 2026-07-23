@@ -22,13 +22,17 @@ export const ExerciseForm: FC<Props> = ({ fields, onSubmit, renderFooter }) => {
     defaultValues: fields,
   });
 
+  const uploadProps = register("image");
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <ImageUpload
-        onFileSelect={(file) =>
+        onFileSelect={(file) => {
           // TODO: Find more fancy solution
-          register("image").onChange({ target: { value: file } })
-        }
+          uploadProps.onChange({
+            target: { value: file, name: uploadProps.name },
+          });
+        }}
         // TODO: Pizdec... Come up something later. MAX PRIORITY.
         previewUrl={fields?.image && URL.createObjectURL(fields.image)}
       />
