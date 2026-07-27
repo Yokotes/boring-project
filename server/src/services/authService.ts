@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { prisma } from "@/prisma/client";
 
 export const authUser = async (user: { login: string; password: string }) => {
@@ -13,10 +14,14 @@ export const authUser = async (user: { login: string; password: string }) => {
   return false;
 };
 
-export const checkAuth = async (name: string) => {
+export const checkAuth = async (token: string) => {
+  const { user } = jwt.verify(token, import.meta.env.VITE_JWT_SECRET) as {
+    user: string;
+  };
+
   const found = await prisma.user.findFirst({
     where: {
-      name: name,
+      name: user,
     },
   });
 

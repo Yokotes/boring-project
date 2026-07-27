@@ -2,6 +2,7 @@ import { Router } from "express";
 import jwt from "jsonwebtoken";
 import type { AuthRequestBody } from "../types";
 import { authUser, checkAuth } from "../services";
+import { getTokenFromCookie } from "../utils";
 
 const authRouter = Router();
 
@@ -32,18 +33,13 @@ authRouter.post("/auth", async (req, res) => {
 });
 
 authRouter.get("/check-auth", async (req, res) => {
-  const cookie = req.headers["cookie"];
-  const token = /token=(.*)/.exec(cookie || "")?.[1];
+  const token = getTokenFromCookie(req.headers["cookie"]);
 
-  if (!token) return res.sendStatus(401);
+  if (token) {
+    const user = await checkAuth(token);
 
-  const data = jwt.verify(token, import.meta.env.VITE_JWT_SECRET) as {
-    user: string;
-  };
-
-  const user = await checkAuth(data.user);
-
-  if (user) return res.status(200).send({ user });
+    if (user) return res.status(200).send({ user });
+  }
 
   res.sendStatus(401);
 });
