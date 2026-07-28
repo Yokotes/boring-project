@@ -1,4 +1,4 @@
-import { useCallback, useState, type FC } from "react";
+import { useCallback, useEffect, useState, type FC } from "react";
 import { PageLayout } from "@/components/PageLayout";
 import { SearchForm } from "@/components/SearchForm";
 import { ExerciseCard } from "@/components/ExerciseCard";
@@ -6,21 +6,28 @@ import { Icon } from "@/components/Icon";
 import { ButtonModal } from "@/components/ButtonModal";
 import { CreateExerciseContainer } from "@/containers/CreateExerciseContainer";
 import styles from "./ExercisesPage.module.scss";
-
-const EXERCISES_LIST_MOCK = [
-  { name: "Тестовое упражнение" },
-  { name: "123" },
-  { name: "456" },
-  { name: "768" },
-];
+import { useLazyGetAllExercisesQuery } from "@/app/api";
+import type { Exercise } from "@/app/types";
 
 export const ExercisesPage: FC = () => {
-  // TODO: Change when they will be fetching from backend
-  const [exercises, setExercises] = useState(EXERCISES_LIST_MOCK);
+  const [fetchExercises, { data = [] }] = useLazyGetAllExercisesQuery();
+  const [exercises, setExercises] = useState<Exercise[]>([]);
 
-  const handleSearch = useCallback((val: string) => {
-    setExercises(EXERCISES_LIST_MOCK.filter((item) => item.name.includes(val)));
-  }, []);
+  const handleSearch = useCallback(
+    (val: string) => {
+      setExercises(data.filter((item) => item.title.includes(val)));
+    },
+    [data],
+  );
+
+  const handleFormSubmit = (closeModal: () => void) => () => {
+    closeModal();
+    fetchExercises().then(({ data = [] }) => setExercises(data));
+  };
+
+  useEffect(() => {
+    fetchExercises().then(({ data = [] }) => setExercises(data));
+  }, [fetchExercises]);
 
   return (
     <PageLayout className={styles.page}>
@@ -35,18 +42,27 @@ export const ExercisesPage: FC = () => {
             startIcon={<Icon.Add />}
             modalTitle="Добавить упражнение"
             renderModalContent={(closeModal) => (
-              <CreateExerciseContainer onCancel={closeModal} />
+              <CreateExerciseContainer
+                onCancel={closeModal}
+                onSubmit={handleFormSubmit(closeModal)}
+              />
             )}
           >
             Добавить
           </ButtonModal>
         </div>
+        {/* TODO: Add fancy loader */}
         {exercises.length < 1 ? (
           <div className={styles.empty}>Упражнений не найдено</div>
         ) : (
           <div className={styles.cards}>
             {exercises.map((item) => (
-              <ExerciseCard key={item.name} title={item.name} />
+              <ExerciseCard
+                key={item.title}
+                title={item.title}
+                imageUrl={item.imageUrl}
+                description={item.description}
+              />
             ))}
           </div>
         )}

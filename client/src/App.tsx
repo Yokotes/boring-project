@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useLazyCheckAuthQuery } from "@/app/apis";
+import { useLazyCheckAuthQuery } from "@/app/api";
 import { setUser } from "@/app/slices";
 import type { Page } from "@/app/types";
 import { CurrentPage, useRouter } from "@/pages/Router";

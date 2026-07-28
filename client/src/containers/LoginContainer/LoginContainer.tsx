@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { useAuthMutation } from "@/app/apis";
+import { useAuthMutation } from "@/app/api";
 import { setUser } from "@/app/slices";
 import { Button } from "@/components/Button";
 import { TextField } from "@/components/TextField";

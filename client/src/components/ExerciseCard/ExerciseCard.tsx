@@ -7,17 +7,18 @@ import { ExerciseDetailsContainer } from "@/containers/ExerciseDetailsContainer"
 
 interface Props {
   title: string;
+  description: string;
   imageUrl?: string;
 }
 
-export const ExerciseCard: FC<Props> = ({ title, imageUrl }) => {
+export const ExerciseCard: FC<Props> = ({ title, description, imageUrl }) => {
   return (
     <ButtonModal
       modalTitle="Просмотр упражнения"
       renderModalContent={() => (
         <ExerciseDetailsContainer
           title={title}
-          description="Test"
+          description={description}
           imageUrl={imageUrl}
         />
       )}

@@ -1,4 +1,4 @@
-import { useRef, type ChangeEventHandler, type FC } from "react";
+import { useRef, type ChangeEvent, type FC } from "react";
 import { EMPTY_FUNCTION } from "@/consts";
 import { TextField } from "../TextField";
 import styles from "./SearchForm.module.scss";
@@ -12,16 +12,13 @@ interface Props {
 }
 
 export const SearchForm: FC<Props> = ({ onSearch = EMPTY_FUNCTION }) => {
-  // NOTE: To not lose value through rerenders
   const timeoutId = useRef<number>(undefined);
 
-  const handleDebouncedChange: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
+  const handleDebouncedChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timeoutId.current);
 
     timeoutId.current = setTimeout(() => {
-      const val = event.target.value;
+      const val = e.target.value;
 
       onSearch(val);
     }, DEBOUNCE_TIME);
