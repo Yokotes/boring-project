@@ -2,6 +2,30 @@
 
 Fullstack app fit tracker that I'm working on while trying to get a job.
 
+## About
+
+Boring Project is a fit tracker that I'm working on for personal use.
+Also there are other reasons:
+
+- Learn Prisma ORM
+- Learn more about architecture patterns (modified FSD, etc)
+- Learn more about React Toolkit Query
+- Having fun :)
+
+**Functionality:**
+
+- ✅ Exercises (create, update, delete)
+- ❌ Sets (create, update, delete)
+- ❌ Schedules (create, update, delete, marking as current)
+- ❌ Progress on charts
+
+## Stages of work
+
+- 👉 **MVP** (I'm here) - create project with no paying time to architecture, patterns, etc. At the the end of the stage I'll have working project with full functionality
+- 🕒 Architecture fixes - reforge project, make it more readable, scalable, maintainable
+- 🕒 Covering with tests - as it says
+- 🕒 FINALE
+
 ## How to run
 
 Go to `./server` and run in command line: `npm run dev`.
