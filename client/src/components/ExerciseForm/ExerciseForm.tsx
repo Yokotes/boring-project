@@ -12,9 +12,9 @@ export interface ExerciseFields {
 }
 
 interface Props {
-  fields?: Partial<ExerciseFields>;
   onSubmit: (vals: ExerciseFields) => void;
-  footer: JSX.Element;
+  fields?: Partial<ExerciseFields>;
+  footer?: JSX.Element;
 }
 
 export const ExerciseForm: FC<Props> = ({ fields, onSubmit, footer }) => {
@@ -24,7 +24,11 @@ export const ExerciseForm: FC<Props> = ({ fields, onSubmit, footer }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <ImagePreviewField {...register("imageUrl")} />
+      <ImagePreviewField
+        // TODO: Find another solution to get image url
+        defaultPreviewUrl={fields?.imageUrl}
+        {...register("imageUrl")}
+      />
       <TextField placeholder="Название" {...register("title")} />
       <TextArea placeholder="Описание" {...register("description")} />
       {footer}

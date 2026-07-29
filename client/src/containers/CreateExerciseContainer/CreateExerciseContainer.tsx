@@ -33,12 +33,12 @@ export const CreateExerciseContainer: FC<Props> = ({
         onSubmit={handleSubmitForm}
         footer={
           <div className={styles.panel}>
-            <Button>Добавить</Button>
             {onCancel && (
               <Button type="button" variant="outlined" onClick={onCancel}>
                 Отмена
               </Button>
             )}
+            <Button>Добавить</Button>
           </div>
         }
       />

@@ -14,6 +14,10 @@ const NAV_ITEMS: NavItem[] = [
     page: "/schedules",
   },
   {
+    title: "Сеты",
+    page: "/sets",
+  },
+  {
     title: "Упражнения",
     page: "/exercises",
   },

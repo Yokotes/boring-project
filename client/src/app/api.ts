@@ -10,6 +10,7 @@ export const baseQuery = fetchBaseQuery({
 
 const authApi = createApi({
   baseQuery,
+  tagTypes: ["Exercise"],
   endpoints: (build) => ({
     auth: build.mutation<{ user: string }, { login: string; password: string }>(
       {
@@ -30,6 +31,7 @@ const authApi = createApi({
         url: "/exercise",
       }),
       transformResponse: (response: { data: Exercise[] }) => response.data,
+      providesTags: ["Exercise"],
     }),
     createExercise: build.mutation<Exercise, ExerciseFields>({
       query: (data) => ({
@@ -38,6 +40,16 @@ const authApi = createApi({
         body: data,
       }),
       transformResponse: (response: { data: Exercise }) => response.data,
+      invalidatesTags: ["Exercise"],
+    }),
+    updateExercise: build.mutation<Exercise, ExerciseFields & { id: number }>({
+      query: (data) => ({
+        url: `/exercise/${data.id}`,
+        method: "PUT",
+        body: data,
+      }),
+      transformResponse: (response: { data: Exercise }) => response.data,
+      invalidatesTags: ["Exercise"],
     }),
   }),
 });
@@ -49,4 +61,5 @@ export const {
   useLazyCheckAuthQuery,
   useLazyGetAllExercisesQuery,
   useCreateExerciseMutation,
+  useUpdateExerciseMutation,
 } = authApi;

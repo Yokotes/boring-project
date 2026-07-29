@@ -22,12 +22,17 @@ export const ExercisesPage: FC = () => {
 
   const handleFormSubmit = (closeModal: () => void) => () => {
     closeModal();
-    fetchExercises().then(({ data = [] }) => setExercises(data));
+    fetchExercises();
   };
 
+  // TODO: Come up with another solution
   useEffect(() => {
-    fetchExercises().then(({ data = [] }) => setExercises(data));
+    fetchExercises();
   }, [fetchExercises]);
+
+  useEffect(() => {
+    setExercises(data);
+  }, [data]);
 
   return (
     <PageLayout className={styles.page}>
@@ -58,7 +63,8 @@ export const ExercisesPage: FC = () => {
           <div className={styles.cards}>
             {exercises.map((item) => (
               <ExerciseCard
-                key={item.title}
+                key={item.id}
+                id={item.id}
                 title={item.title}
                 imageUrl={item.imageUrl}
                 description={item.description}

@@ -12,6 +12,7 @@
   background: var(--color-bg);
   border-radius: 16px 16px 0 0;
   overflow: hidden;
+  max-height: 338px;
 }
 
 .image {
@@ -42,4 +43,14 @@
   font-family: var(--font-body);
   font-size: 14px;
   color: var(--color-muted);
+}
+
+.panel {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.rightSided {
+  justify-content: flex-end;
 }

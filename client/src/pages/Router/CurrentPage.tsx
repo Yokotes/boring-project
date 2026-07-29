@@ -6,12 +6,14 @@ import { ExercisesPage } from "../ExercisesPage";
 import { SchedulesPage } from "../SchedulesPage";
 import { useRouter } from "./RouterContext";
 import { NotFoundPage } from "../NotFoundPage";
+import { SetsPage } from "../SetsPage";
 
 const PAGES: Record<Page, JSX.Element> = {
   "/login": <LoginPage />,
   "/home": <HomePage />,
   "/exercises": <ExercisesPage />,
   "/schedules": <SchedulesPage />,
+  "/sets": <SetsPage />,
 };
 
 export const CurrentPage: FC = memo(() => {

@@ -6,17 +6,24 @@ import { ButtonModal } from "../ButtonModal";
 import { ExerciseDetailsContainer } from "@/containers/ExerciseDetailsContainer";
 
 interface Props {
+  id: number;
   title: string;
   description: string;
   imageUrl?: string;
 }
 
-export const ExerciseCard: FC<Props> = ({ title, description, imageUrl }) => {
+export const ExerciseCard: FC<Props> = ({
+  id,
+  title,
+  description,
+  imageUrl,
+}) => {
   return (
     <ButtonModal
       modalTitle="Просмотр упражнения"
       renderModalContent={() => (
         <ExerciseDetailsContainer
+          id={id}
           title={title}
           description={description}
           imageUrl={imageUrl}

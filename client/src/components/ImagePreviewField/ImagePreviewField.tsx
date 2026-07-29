@@ -12,10 +12,10 @@ import styles from "./ImagePreviewField.module.scss";
 const DEBOUNCE_TIME = 300;
 
 export const ImagePreviewField: FC<
-  Omit<ComponentPropsWithRef<"input">, "type">
-> = (props) => {
+  Omit<ComponentPropsWithRef<"input">, "type"> & { defaultPreviewUrl?: string }
+> = ({ defaultPreviewUrl = "", ...props }) => {
   const timeoutId = useRef<number>(undefined);
-  const [previewUrl, setPreviewUrl] = useState<string>();
+  const [previewUrl, setPreviewUrl] = useState<string>(defaultPreviewUrl);
 
   const handleDebouncedChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timeoutId.current);
