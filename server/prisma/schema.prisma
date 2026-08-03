@@ -22,4 +22,35 @@ model Exercise {
   title String
   description String
   imageUrl String?
+
+  // Relations
+  setExercises SetExercise[]
+}
+
+model SetExercise {
+  id Int @id @default(autoincrement())
+  reps Int
+
+  // Relations
+  exerciseId Int
+  exercise Exercise @relation(fields: [exerciseId], references: [id])
+  setId Int
+  set Set @relation(fields: [setId], references: [id])
+}
+
+model Set {
+  id Int @id @default(autoincrement())
+
+  // Relations 
+  exercises SetExercise[]
+  trainingId Int
+  trainings Training @relation(fields: [trainingId], references: [id])
+}
+
+model Training {
+  id Int @id @default(autoincrement())
+  title String
+
+  // Relations
+  sets Set[]
 }

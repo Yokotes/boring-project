@@ -1,0 +1,22 @@
+-- CreateTable
+CREATE TABLE "SetExercise" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "reps" INTEGER NOT NULL,
+    "exerciseId" INTEGER NOT NULL,
+    "setId" INTEGER NOT NULL,
+    CONSTRAINT "SetExercise_exerciseId_fkey" FOREIGN KEY ("exerciseId") REFERENCES "Exercise" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "SetExercise_setId_fkey" FOREIGN KEY ("setId") REFERENCES "Set" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Set" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "trainingId" INTEGER NOT NULL,
+    CONSTRAINT "Set_trainingId_fkey" FOREIGN KEY ("trainingId") REFERENCES "Training" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Training" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL
+);
