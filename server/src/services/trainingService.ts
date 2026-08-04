@@ -74,17 +74,5 @@ export class TrainingService extends Service {
         })),
       })),
     } as DetailedTraining;
-
-    // const data: ResponseData = {
-    //   id: training.id,
-    //   title: training.title,
-    //   sets: sets.map((set) => ({
-    //     id: set!.id,
-    //     exercises: set!.exercises.map((exercise) => ({
-    //       reps: exercise.reps,
-    //       ...exercisesMap[exercise.id],
-    //     })),
-    //   })),
-    // };
   }
 }
