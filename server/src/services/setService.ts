@@ -1,5 +1,14 @@
-import { prisma } from "@/prisma/client";
+import type { DBCLient } from "../dbClients";
+import { Service } from "./service";
 
-export const getSetById = (id: number) => {
-  return prisma.set.findUnique({ where: { id }, include: { exercises: true } });
-};
+export class SetService extends Service {
+  constructor(dbClient: DBCLient) {
+    super(dbClient);
+  }
+
+  getById(id: number) {
+    return this.dbClient.findUniqueSet({
+      where: { id },
+    });
+  }
+}

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import type { AuthRequestBody } from "../types";
-import { authUser, checkAuth } from "../services";
+import { authService } from "../services";
 import { getTokenFromCookie } from "../utils";
 
 const authRouter = Router();
@@ -12,7 +12,7 @@ authRouter.post("/auth", async (req, res) => {
   if (!data) return res.sendStatus(401);
 
   try {
-    const user = await authUser(data);
+    const user = await authService.authUser(data);
 
     if (user) {
       const token = jwt.sign(
@@ -36,7 +36,7 @@ authRouter.get("/check-auth", async (req, res) => {
   const token = getTokenFromCookie(req.headers["cookie"]);
 
   if (token) {
-    const user = await checkAuth(token);
+    const user = await authService.checkAuth(token);
 
     if (user) return res.status(200).send({ user });
   }

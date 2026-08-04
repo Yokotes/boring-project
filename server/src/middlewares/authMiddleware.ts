@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { getTokenFromCookie } from "../utils";
-import { checkAuth } from "../services";
+import { authService } from "../services";
 
 export const authMiddleware = async (
   req: Request,
@@ -10,7 +10,7 @@ export const authMiddleware = async (
   const token = getTokenFromCookie(req.headers["cookie"]);
 
   if (token) {
-    const user = await checkAuth(token);
+    const user = await authService.checkAuth(token);
 
     if (user) return next();
   }

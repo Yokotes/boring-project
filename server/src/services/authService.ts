@@ -1,31 +1,38 @@
 import jwt from "jsonwebtoken";
-import { prisma } from "@/prisma/client";
+import { Service } from "./service";
+import type { DBCLient } from "../dbClients";
 
-export const authUser = async (user: { login: string; password: string }) => {
-  const found = await prisma.user.findFirst({
-    where: {
-      name: user.login,
-    },
-  });
+export class AuthService extends Service {
+  constructor(dbClient: DBCLient) {
+    super(dbClient);
+  }
 
-  // TODO: Encrypt password later
-  if (found?.password === user.password) return true;
+  async authUser(user: { login: string; password: string }) {
+    const found = await this.dbClient.findUniqueUser({
+      where: {
+        name: user.login,
+      },
+    });
 
-  return false;
-};
+    // TODO: Encrypt password later
+    if (found?.password === user.password) return true;
 
-export const checkAuth = async (token: string) => {
-  const { user } = jwt.verify(token, import.meta.env.VITE_JWT_SECRET) as {
-    user: string;
-  };
+    return false;
+  }
 
-  const found = await prisma.user.findFirst({
-    where: {
-      name: user,
-    },
-  });
+  async checkAuth(token: string) {
+    const { user } = jwt.verify(token, import.meta.env.VITE_JWT_SECRET) as {
+      user: string;
+    };
 
-  if (found) return found.name;
+    const found = await this.dbClient.findUniqueUser({
+      where: {
+        name: user,
+      },
+    });
 
-  return false;
-};
+    if (found) return found.name;
+
+    return false;
+  }
+}

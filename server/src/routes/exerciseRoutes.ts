@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authMiddleware } from "../middlewares";
-import { createExercise, getAllExercises, updateExercise } from "../services";
+import { exerciseService } from "../services";
 import type { ExerciseRequestBody } from "../types";
 
 const exerciseRouter = Router();
@@ -8,7 +8,7 @@ const exerciseRouter = Router();
 exerciseRouter.use(authMiddleware);
 
 exerciseRouter.get("/exercise", async (_, res) => {
-  const data = await getAllExercises();
+  const data = await exerciseService.getAll();
 
   res.status(200).send({ data });
 });
@@ -21,7 +21,7 @@ exerciseRouter.post("/exercise", async (req, res) => {
 
   let created;
   try {
-    created = await createExercise(data);
+    created = await exerciseService.create(data);
   } catch (error) {
     return res.status(500).send({ error });
   }
@@ -38,7 +38,7 @@ exerciseRouter.put("/exercise/:id", async (req, res) => {
 
   let updated;
   try {
-    updated = await updateExercise(id, data);
+    updated = await exerciseService.update(id, data);
   } catch (error) {
     return res.status(500).send({ error });
   }

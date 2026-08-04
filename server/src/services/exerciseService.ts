@@ -1,18 +1,25 @@
-import { prisma } from "@/prisma/client";
+import type { DBCLient } from "../dbClients";
 import type { ExerciseRequestBody } from "../types";
+import { Service } from "./service";
 
-export const getAllExercises = () => {
-  return prisma.exercise.findMany();
-};
+export class ExerciseService extends Service {
+  constructor(dbClient: DBCLient) {
+    super(dbClient);
+  }
 
-export const getExerciseById = (id: number) => {
-  return prisma.exercise.findUnique({ where: { id } });
-};
+  getAll() {
+    return this.dbClient.findManyExercises();
+  }
 
-export const createExercise = (exercise: ExerciseRequestBody) => {
-  return prisma.exercise.create({ data: exercise });
-};
+  getById(id: number) {
+    return this.dbClient.findUniqueExercise({ where: { id } });
+  }
 
-export const updateExercise = (id: number, exercise: ExerciseRequestBody) => {
-  return prisma.exercise.update({ where: { id }, data: exercise });
-};
+  create(exercise: ExerciseRequestBody) {
+    return this.dbClient.createExercise(exercise);
+  }
+
+  update(id: number, exercise: ExerciseRequestBody) {
+    return this.dbClient.updateExerciseById(id, exercise);
+  }
+}
