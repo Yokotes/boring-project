@@ -8,7 +8,7 @@ interface RouteOptions {
   withoutLayout?: boolean;
 }
 
-interface Route {
+export interface Route {
   url: string;
   Component: ComponentType;
   options?: RouteOptions;

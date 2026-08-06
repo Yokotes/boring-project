@@ -1,17 +1,21 @@
 import { Nav, PageLayout, UserProfile } from "@/shared/ui/page-layout";
-import { useRouter } from "./use-router";
+import { RouterProvider } from "@/shared/lib/router";
+import { useRouterRenderer } from "./use-router-renderer";
 
 export const RouterRenderer = () => {
-  const { Component, navLinks, withoutLayout } = useRouter();
+  const { navLinks, withoutLayout, user, goToPage, Component } =
+    useRouterRenderer();
 
   if (withoutLayout) return <Component />;
 
   return (
-    <PageLayout
-      userSlot={<UserProfile user={"user"} />}
-      navSlot={<Nav items={navLinks} />}
-    >
-      <Component />
-    </PageLayout>
+    <RouterProvider value={{ goToPage }}>
+      <PageLayout
+        userSlot={<UserProfile user={user!} />}
+        navSlot={<Nav items={navLinks} />}
+      >
+        <Component />
+      </PageLayout>
+    </RouterProvider>
   );
 };
