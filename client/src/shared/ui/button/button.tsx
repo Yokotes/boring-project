@@ -1,19 +1,18 @@
-import type { ComponentPropsWithoutRef, FC, JSX, ReactNode } from "react";
-import styles from "./Button.module.scss";
+import type { ComponentPropsWithoutRef, JSX } from "react";
+import styles from "./button.module.scss";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
-  children: ReactNode;
   variant?: "primary" | "secondary" | "outlined";
   startIcon?: JSX.Element;
 }
 
-export const Button: FC<Props> = ({
+export const Button = ({
   children,
   className,
   startIcon,
   variant = "primary",
   ...otherProps
-}) => {
+}: Props) => {
   return (
     <button
       {...otherProps}

@@ -23,6 +23,7 @@ const getRoute = (url: string) =>
   url in ROUTES_MAP ? ROUTES_MAP[url] : ROUTES_MAP["/404"];
 
 export const useRouterRenderer = () => {
+  // TODO: Come up what to do if user authorized and go to login page
   const [url, setUrl] = useState(document.location.pathname);
   const { checkAuth, isLoading, user } = useCheckAuth();
   const currentRoute = useMemo(() => getRoute(url), [url]);
@@ -39,8 +40,8 @@ export const useRouterRenderer = () => {
   useEffect(() => {
     if (!currentRoute.options?.authCheck) return;
 
-    checkAuth().then((isAuth) => {
-      if (!isAuth) goToPage("/login");
+    checkAuth().catch(() => {
+      goToPage("/login");
     });
   }, [checkAuth, currentRoute, goToPage]);
 

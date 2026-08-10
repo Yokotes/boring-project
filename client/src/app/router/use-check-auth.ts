@@ -10,7 +10,6 @@ export const useCheckAuth = () => {
   const checkAuth = useCallback(async () => {
     setIsLoading(true);
 
-    // TODO: Add Error handling
     const data = await client.fetchQuery({
       queryKey: ["auth"],
       queryFn: checkAuthQueryFn,

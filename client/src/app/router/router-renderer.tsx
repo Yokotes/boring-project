@@ -6,7 +6,12 @@ export const RouterRenderer = () => {
   const { navLinks, withoutLayout, user, goToPage, Component } =
     useRouterRenderer();
 
-  if (withoutLayout) return <Component />;
+  if (withoutLayout)
+    return (
+      <RouterProvider value={{ goToPage }}>
+        <Component />
+      </RouterProvider>
+    );
 
   return (
     <RouterProvider value={{ goToPage }}>
