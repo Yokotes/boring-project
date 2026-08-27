@@ -1,20 +1,14 @@
 .page {
-  padding: 0;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
-.panel {
-  display: flex;
-
+.search {
   border-bottom: 1px solid var(--color-border);
   padding: 24px;
   background: var(--color-surface);
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-
-  .searchForm {
-    flex: 1;
-  }
 }
 
 .content {
@@ -24,7 +18,7 @@
   flex: 1;
 }
 
-.addBtnContainer {
+.actions {
   padding-block: 15px;
 }
 
