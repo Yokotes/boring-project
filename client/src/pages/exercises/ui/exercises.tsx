@@ -36,7 +36,7 @@ export const ExercisesPage = () => {
                 key={exercise.id}
                 id={exercise.id}
                 title={exercise.title}
-                descriptions={exercise.description}
+                description={exercise.description}
                 imageUrl={exercise.imageUrl}
               />
             ))}

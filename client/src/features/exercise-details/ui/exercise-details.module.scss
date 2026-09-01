@@ -1,6 +1,4 @@
-// ExerciseDetails.module.scss
-
-.wrapper {
+.layout {
   display: flex;
   flex-direction: column;
 }
@@ -45,12 +43,9 @@
   color: var(--color-muted);
 }
 
-.panel {
+.actions {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-}
-
-.rightSided {
   justify-content: flex-end;
 }

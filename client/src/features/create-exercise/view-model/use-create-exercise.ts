@@ -16,6 +16,7 @@ export const useCreateExercise = (onSubmit?: () => void) => {
 
   const submitHandler = (vals: ExerciseFields) => {
     mutateAsync(vals).then((res) => {
+      // TODO: Replace with notification
       console.log("Упражнеие было создано!", res);
       onSubmit?.();
     });

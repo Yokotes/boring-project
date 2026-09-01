@@ -23,3 +23,18 @@ export const createExerciseMutationFn: MutationFunction<
   })
     .then((res) => res.json())
     .then((res) => res.data);
+
+export const editExerciseMutationFn: MutationFunction<
+  Exercise,
+  ExerciseFields & { id: number }
+> = ({ id, ...exercise }) =>
+  fetch(`/api/exercise/${id}`, {
+    credentials: "include",
+    method: "PUT",
+    body: JSON.stringify(exercise),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => res.data);

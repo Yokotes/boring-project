@@ -1,6 +1,6 @@
 import { TextField } from "@/shared/ui/text-field";
 import { CreateExerciseLayout } from "./create-exercise-layout";
-import { useCreateExercise } from "./use-create-exercise";
+import { useCreateExercise } from "../view-model/use-create-exercise";
 import { Button } from "@/shared/ui/button";
 import { TextArea } from "@/shared/ui/text-area";
 import { ImagePreviewField } from "@/shared/ui/image-preview-field";

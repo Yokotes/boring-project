@@ -1,5 +1,5 @@
 import type { PropsWithChildren, SubmitEventHandler } from "react";
-import styles from "./create-exercise.module.scss";
+import styles from "./edit-exercise.module.scss";
 
 const Layout = ({
   children,
@@ -16,4 +16,4 @@ const Actions = ({ children }: PropsWithChildren) => {
   return <div className={styles.actions}>{children}</div>;
 };
 
-export const CreateExerciseLayout = Object.assign(Layout, { Actions });
+export const EditExerciseLayout = Object.assign(Layout, { Actions });

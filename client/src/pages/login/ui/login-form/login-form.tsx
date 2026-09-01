@@ -2,7 +2,7 @@ import { LoginLayout } from "../login-layout";
 import { Button } from "@/shared/ui/button";
 import { TextField } from "@/shared/ui/text-field";
 import type { LoginFields } from "../../model/fields";
-import { useLoginForm } from "./use-login-form";
+import { useLoginForm } from "../../view-model/use-login-form";
 
 interface Props {
   onSubmit?: (vals: LoginFields) => void;
