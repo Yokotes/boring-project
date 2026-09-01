@@ -25,8 +25,8 @@ authRouter.post("/auth", async (req, res) => {
         .send({ user: data.login });
     }
   } catch (e) {
-    // TODO: Add error later
-    res.sendStatus(500);
+    console.error(e);
+    return res.sendStatus(500);
   }
 
   res.sendStatus(401);
