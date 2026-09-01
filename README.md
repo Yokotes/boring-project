@@ -21,8 +21,8 @@ Also there are other reasons:
 
 ## Stages of work
 
-- 👉 **MVP** (I'm here) - create project with no paying time to architecture, patterns, etc. At the the end of the stage I'll have working project with full functionality
-- 🕒 Architecture fixes - reforge project, make it more readable, scalable, maintainable
+- 👉 **MVP** (I'm here) - create project with minimal functionality. At the the end of the stage I'll have working project
+- 🕒 Architecture fixes - small fixes to make project more readable, scalable, maintainable
 - 🕒 Covering with tests - as it says
 - 🕒 FINALE
 
@@ -42,7 +42,7 @@ Here are libs and technologies that were used in project.
 
 - React
 - Typescript
-- Redux Toolkit + Query
+- Tanstack Query
 - SCSS Modules
 - Vite
 
