@@ -10,4 +10,8 @@ const prismaDbClient = new PrismaDBClient();
 export const authService = new AuthService(prismaDbClient);
 export const setService = new SetService(prismaDbClient);
 export const exerciseService = new ExerciseService(prismaDbClient);
-export const trainingService = new TrainingService(prismaDbClient);
+export const trainingService = new TrainingService(
+  prismaDbClient,
+  setService,
+  exerciseService,
+);

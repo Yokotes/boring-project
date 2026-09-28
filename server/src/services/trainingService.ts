@@ -19,8 +19,15 @@ export class TrainingService extends Service {
     this.exerciseService = exerciseService;
   }
 
-  getAll() {
-    return this.dbClient.findManyTrainings();
+  async getAll() {
+    const trainings = await this.dbClient.findManyTrainings();
+
+    if (trainings.length < 1) return [] as DetailedTraining[];
+
+    // TODO: Lazy solution, come up with another
+    return Promise.all(
+      trainings.map((training) => this.getDetailedById(training.id)),
+    ).then((arr) => arr.filter((item) => !!item));
   }
 
   getById(id: number) {
