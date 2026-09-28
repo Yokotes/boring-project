@@ -3,11 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 
 // TODO: Maybe move VM hooks to VM segment???
 export const useExercises = () => {
-  const { data } = useQuery({
+  const { data: exercises } = useQuery({
     initialData: [],
     queryKey: ["exercise"],
     queryFn: getExercisesQueryFn,
   });
 
-  return { exercises: data };
+  return { exercises };
 };

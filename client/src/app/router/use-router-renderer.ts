@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { homeRoute } from "@/pages/home";
 import { exercisesRoute } from "@/pages/exercises";
+import { trainingsRoute } from "@/pages/trainings";
 import { loginRoute } from "@/pages/login";
 import { notFoundRoute } from "@/pages/not-found";
 import { transformNavLinks } from "@/shared/lib/router";
@@ -17,6 +18,7 @@ const ROUTES_MAP = {
   [loginRoute.url]: loginRoute,
   [homeRoute.url]: homeRoute,
   [exercisesRoute.url]: exercisesRoute,
+  [trainingsRoute.url]: trainingsRoute,
 };
 
 const getRoute = (url: string) =>
