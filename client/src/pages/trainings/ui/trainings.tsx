@@ -1,6 +1,7 @@
 import { ButtonModal } from "@/shared/ui/button-modal";
-import { TrainingsLayout } from "./trainings-layout";
 import { Icon } from "@/shared/ui/icon";
+import { CreateTraining } from "@/features/create-training/ui";
+import { TrainingsLayout } from "./trainings-layout";
 import { useTrainings } from "./use-trainings";
 import { TrainingCard } from "./card";
 
@@ -13,7 +14,9 @@ export const TrainingsPage = () => {
         <ButtonModal
           startIcon={<Icon.Add />}
           modalTitle="Добавить тренировку"
-          renderModalContent={() => <>Контент модалки</>}
+          renderModalContent={(closeModal) => (
+            <CreateTraining onCancel={closeModal} />
+          )}
         >
           Добавить
         </ButtonModal>
