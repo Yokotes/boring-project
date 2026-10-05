@@ -2,6 +2,7 @@ import { Button } from "@/shared/ui/button";
 import { TextField } from "@/shared/ui/text-field";
 import { CreateTrainingLayout } from "./create-training-layout";
 import { SetsField } from "./sets-field";
+import { useCreateTraining } from "../view-model/use-create-training";
 
 export const CreateTraining = ({
   onCancel,
@@ -10,11 +11,12 @@ export const CreateTraining = ({
   onCancel?: () => void;
   onSubmit?: () => void;
 }) => {
-  return (
-    <CreateTrainingLayout>
-      <TextField placeholder="Название" />
-      <SetsField />
+  const { control, register, onSubmit } = useCreateTraining(submitHandler);
 
+  return (
+    <CreateTrainingLayout onSubmit={onSubmit}>
+      <TextField placeholder="Название" {...register("title")} />
+      <SetsField control={control} register={register} />
       <CreateTrainingLayout.Actions>
         <Button type="button" variant="outlined" onClick={onCancel}>
           Отмена

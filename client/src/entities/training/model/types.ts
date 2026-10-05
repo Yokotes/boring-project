@@ -20,3 +20,18 @@ export interface ListTraining {
   title: string;
   exercises: ExerciseWithRepsArray[];
 }
+
+// FORM FIELDS
+interface ExerciseFields {
+  id: number;
+  title: string;
+  reps: number;
+}
+
+interface SetFields {
+  exercises: ExerciseFields[];
+}
+export interface TrainingFields {
+  title: string;
+  sets: SetFields[];
+}

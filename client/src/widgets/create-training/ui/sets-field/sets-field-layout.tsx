@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 import styles from "./sets-field.module.scss";
 
 const Layout = ({ children }: PropsWithChildren) => {
@@ -21,25 +21,34 @@ const Exercises = ({ children }: PropsWithChildren) => {
   return <div className={styles.exercises}>{children}</div>;
 };
 
-export const RemoveSetButton = ({ children }: PropsWithChildren) => {
+export const RemoveSetButton = ({
+  children,
+  ...props
+}: ComponentPropsWithoutRef<"button">) => {
   return (
-    <button className={styles.removeSetButton} type="button">
+    <button className={styles.removeSetButton} type="button" {...props}>
       {children}
     </button>
   );
 };
 
-export const AddSetButton = ({ children }: PropsWithChildren) => {
+export const AddSetButton = ({
+  children,
+  ...props
+}: ComponentPropsWithoutRef<"button">) => {
   return (
-    <button className={styles.addSetButton} type="button">
+    <button className={styles.addSetButton} type="button" {...props}>
       {children}
     </button>
   );
 };
 
-export const AddExerciseButton = ({ children }: PropsWithChildren) => {
+export const AddExerciseButton = ({
+  children,
+  ...props
+}: ComponentPropsWithoutRef<"button">) => {
   return (
-    <button className={styles.addExerciseButton} type="button">
+    <button className={styles.addExerciseButton} type="button" {...props}>
       {children}
     </button>
   );

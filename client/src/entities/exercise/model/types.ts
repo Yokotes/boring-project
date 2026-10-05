@@ -10,3 +10,12 @@ export interface ExerciseFields {
   description: string;
   imageUrl?: string;
 }
+
+export interface ExerciseOption {
+  label: string;
+  value: number;
+}
+
+export interface SelectExerciseFields {
+  exercise: ExerciseOption;
+}
