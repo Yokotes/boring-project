@@ -49,12 +49,42 @@ export class PrismaDBClient implements DBCLient {
   findManyTrainings(options?: TrainingFindManyArgs): Promise<Training[]> {
     return prisma.training.findMany({
       ...options,
-      include: { sets: true },
+      include: {
+        sets: { include: { exercises: { include: { exercise: true } } } },
+      },
     });
   }
   findUniqueTraining(
     options: TrainingFindUniqueArgs,
   ): Promise<Training | null> {
     return prisma.training.findUnique({ ...options, include: { sets: true } });
+  }
+  createTraining(training: Omit<Training, "id">): Promise<Training> {
+    return prisma.training.create({
+      data: {
+        title: training.title,
+        sets: {
+          create: training.sets.map((item) => ({
+            exercises: {
+              create: item.exercises!.map(({ exerciseId, reps }) => ({
+                exerciseId,
+                reps,
+              })),
+            },
+          })),
+        },
+      },
+      include: {
+        sets: {
+          include: {
+            exercises: {
+              include: {
+                exercise: true,
+              },
+            },
+          },
+        },
+      },
+    });
   }
 }

@@ -2,7 +2,8 @@ import { Service } from "./service";
 import type { DBCLient } from "../dbClients";
 import type { SetService } from "./setService";
 import type { ExerciseService } from "./exerciseService";
-import type { DetailedTraining, Exercise } from "../model";
+import type { DetailedTraining, Exercise, Training } from "../model";
+import type { TrainingRequestBody } from "../types";
 
 export class TrainingService extends Service {
   private setService: SetService;
@@ -19,15 +20,22 @@ export class TrainingService extends Service {
     this.exerciseService = exerciseService;
   }
 
+  create({ title, sets }: TrainingRequestBody) {
+    const dataToCreate: Omit<Training, "id"> = {
+      title,
+      sets: sets.map(({ exercises }) => ({
+        exercises: exercises.map(({ reps, id }) => ({
+          reps: Number(reps),
+          exerciseId: id,
+        })),
+      })),
+    };
+
+    return this.dbClient.createTraining(dataToCreate);
+  }
+
   async getAll() {
-    const trainings = await this.dbClient.findManyTrainings();
-
-    if (trainings.length < 1) return [] as DetailedTraining[];
-
-    // TODO: Lazy solution, come up with another
-    return Promise.all(
-      trainings.map((training) => this.getDetailedById(training.id)),
-    ).then((arr) => arr.filter((item) => !!item));
+    return this.dbClient.findManyTrainings();
   }
 
   getById(id: number) {
@@ -43,7 +51,7 @@ export class TrainingService extends Service {
 
     const sets = (
       await Promise.all(
-        training.sets.map((set) => this.setService.getById(set.id)),
+        training.sets.map((set) => this.setService.getById(set.id!)),
       )
     ).filter((set) => !!set);
 
@@ -53,15 +61,15 @@ export class TrainingService extends Service {
       if (!set) return;
 
       set.exercises?.forEach((exercise) => {
-        exerciseIds.add(exercise.id);
+        exerciseIds.add(exercise.exerciseId!);
       });
     });
 
-    const exercisesMap = (
-      await Promise.all(
-        [...exerciseIds].map((id) => this.exerciseService.getById(id)),
-      )
-    ).reduce(
+    const test = await Promise.all(
+      [...exerciseIds].map((id) => this.exerciseService.getById(id)),
+    );
+
+    const exercisesMap = test.reduce(
       (acc, exercise) => {
         acc[exercise!.id] = exercise!;
 
@@ -77,7 +85,7 @@ export class TrainingService extends Service {
         id: set.id,
         exercises: set.exercises!.map((exercise) => ({
           reps: exercise.reps,
-          ...exercisesMap[exercise.id],
+          ...exercisesMap[exercise.id!],
         })),
       })),
     } as DetailedTraining;

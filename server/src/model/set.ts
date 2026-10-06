@@ -1,15 +1,15 @@
 import type { ExerciseWithReps } from "./exercise";
 
 export interface SetExercise {
-  id: number;
-  setId: number;
+  id?: number;
+  setId?: number;
   reps: number;
-  exerciseId: number;
+  exerciseId?: number;
 }
 
 export interface Set {
-  id: number;
-  trainingId: number;
+  id?: number;
+  trainingId?: number;
   exercises?: SetExercise[];
 }
 

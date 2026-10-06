@@ -33,9 +33,9 @@ model SetExercise {
 
   // Relations
   exerciseId Int
-  exercise Exercise @relation(fields: [exerciseId], references: [id])
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
   setId Int
-  set Set @relation(fields: [setId], references: [id])
+  set Set @relation(fields: [setId], references: [id], onDelete: Cascade)
 }
 
 model Set {
@@ -44,7 +44,7 @@ model Set {
   // Relations 
   exercises SetExercise[]
   trainingId Int
-  trainings Training @relation(fields: [trainingId], references: [id])
+  training Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
 }
 
 model Training {

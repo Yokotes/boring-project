@@ -19,4 +19,5 @@ export interface DBCLient {
   // Trainings
   findManyTrainings(options?: unknown): Promise<Training[]>;
   findUniqueTraining(options: unknown): Promise<Training | null>;
+  createTraining(training: Omit<Training, "id">): Promise<Training>;
 }
