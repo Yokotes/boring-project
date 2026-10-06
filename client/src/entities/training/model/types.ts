@@ -9,6 +9,27 @@ interface Set {
   exercises: ExerciseWithReps[];
 }
 
+export interface TrainingDTO {
+  id: number;
+  title: string;
+  sets: {
+    id: number;
+    trainingId: number;
+    exercises: {
+      id: number;
+      reps: number;
+      exerciseId: number;
+      setId: number;
+      exercise: {
+        id: number;
+        title: string;
+        description: string;
+        imageUrl: string;
+      };
+    }[];
+  }[];
+}
+
 export interface Training {
   id: number;
   title: string;

@@ -15,7 +15,7 @@ export const TrainingsPage = () => {
           startIcon={<Icon.Add />}
           modalTitle="Добавить тренировку"
           renderModalContent={(closeModal) => (
-            <CreateTraining onCancel={closeModal} />
+            <CreateTraining onCancel={closeModal} onSubmit={closeModal} />
           )}
         >
           Добавить

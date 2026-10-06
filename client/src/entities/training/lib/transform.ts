@@ -1,48 +1,36 @@
-import type { ListTraining, Training } from "../model";
+import type { ListTraining, TrainingDTO } from "../model";
 
-type ExerciseMap = Record<
-  number,
-  ListTraining["exercises"][number] & { index: number }
->;
+const tranformToListItem = ({ id, title, sets }: TrainingDTO): ListTraining => {
+  const exerciseIndexMap = new Map<number, number>();
+  const exercises = [] as ListTraining["exercises"];
 
-// TODO: Надо оптимизировать и реализовать по-легче, слишком сложно и явно замудренно.
-export const transformToListTrainings = (
-  trainings: Training[],
-): ListTraining[] => {
-  const exerciseMaps = trainings.map((training) =>
-    training.sets.reduce((acc, set, setIdx) => {
-      set.exercises.forEach((item, index) => {
-        if (acc[item.id]) {
-          acc[item.id].reps[setIdx] = item.reps;
-        } else {
-          const reps = Array(setIdx);
-          reps[setIdx] = item.reps;
+  sets.forEach((set, setIndex) => {
+    set.exercises.forEach(({ exercise, reps }) => {
+      if (exerciseIndexMap.has(exercise.id)) {
+        const index = exerciseIndexMap.get(exercise.id);
+        exercises[index!].reps[setIndex] = reps;
+      } else {
+        const repsArr = new Array(sets.length);
+        repsArr[setIndex] = reps;
 
-          acc[item.id] = { ...item, reps, index };
-        }
-      });
-
-      return acc;
-    }, {} as ExerciseMap),
-  );
-
-  return trainings.map((item, index) => ({
-    id: item.id,
-    title: item.title,
-    exercises: Object.keys(exerciseMaps[index]).reduce(
-      (acc, key) => {
-        const exercise = exerciseMaps[index][Number(key)];
-        acc[exercise.index] = {
+        exerciseIndexMap.set(exercise.id, exercises.length);
+        exercises.push({
           id: exercise.id,
-          reps: exercise.reps,
           description: exercise.description,
           title: exercise.title,
           imageUrl: exercise.imageUrl,
-        };
+          reps: repsArr,
+        });
+      }
+    });
+  });
 
-        return acc;
-      },
-      [] as ListTraining["exercises"],
-    ),
-  })) as ListTraining[];
+  return { id, title, exercises };
+};
+
+// TODO: Надо оптимизировать и реализовать по-легче, слишком сложно и явно замудренно.
+export const transformToListTrainings = (
+  trainings: TrainingDTO[],
+): ListTraining[] => {
+  return trainings.map(tranformToListItem);
 };
