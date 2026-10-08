@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 
 interface RouterContextValue {
   goToPage: (to: string) => void;
+  params?: Record<string, string>;
 }
 
 const RouterContext = createContext<RouterContextValue | null>(null);

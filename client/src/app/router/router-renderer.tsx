@@ -3,7 +3,7 @@ import { RouterProvider } from "@/shared/lib/router";
 import { useRouterRenderer } from "./use-router-renderer";
 
 export const RouterRenderer = () => {
-  const { navLinks, withoutLayout, user, goToPage, Component } =
+  const { navLinks, withoutLayout, user, params, goToPage, Component } =
     useRouterRenderer();
 
   if (withoutLayout)
@@ -14,7 +14,7 @@ export const RouterRenderer = () => {
     );
 
   return (
-    <RouterProvider value={{ goToPage }}>
+    <RouterProvider value={{ goToPage, params }}>
       <PageLayout
         userSlot={<UserProfile user={user!} />}
         navSlot={<Nav items={navLinks} />}

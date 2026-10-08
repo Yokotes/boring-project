@@ -25,6 +25,7 @@ export const TrainingsPage = () => {
         {trainings.map((item) => (
           <TrainingCard
             key={item.id}
+            id={item.id}
             title={item.title}
             exercises={item.exercises}
           />

@@ -1,17 +1,27 @@
 import type { ListTraining } from "@/entities/training/model";
-import { TrainingCardLayout } from "./training-card-layout";
+import { GoToButton, TrainingCardLayout } from "./training-card-layout";
 import { TrainingCardExercise } from "./exercise";
+import { useRouter } from "@/shared/lib/router";
 
 export const TrainingCard = ({
+  id,
   title,
   exercises,
 }: {
+  id: number;
   title: string;
   exercises: ListTraining["exercises"];
 }) => {
+  const { goToPage } = useRouter();
+
   return (
     <TrainingCardLayout>
-      <TrainingCardLayout.Title>{title}</TrainingCardLayout.Title>
+      <TrainingCardLayout.Header>
+        <TrainingCardLayout.Title>{title}</TrainingCardLayout.Title>
+        <GoToButton onClick={() => goToPage(`/trainings/${id}`)}>
+          Перейти
+        </GoToButton>
+      </TrainingCardLayout.Header>
       <TrainingCardLayout.List>
         {exercises.map((item) => (
           <TrainingCardExercise

@@ -9,6 +9,17 @@ export const getTrainingsQueryFn: QueryFunction<TrainingDTO[]> = () =>
     .then((res) => res.json())
     .then((res) => res.data);
 
+export const getTrainingByIdQueryFn: QueryFunction<
+  TrainingDTO,
+  [key: string, id: number]
+> = ({ queryKey: [, id] }) =>
+  fetch(`/api/training/${id}`, {
+    credentials: "include",
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((res) => res.data);
+
 export const createTrainingMutationFn: MutationFunction<
   TrainingDTO,
   TrainingFields
