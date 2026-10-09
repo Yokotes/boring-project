@@ -57,7 +57,12 @@ export class PrismaDBClient implements DBCLient {
   findUniqueTraining(
     options: TrainingFindUniqueArgs,
   ): Promise<Training | null> {
-    return prisma.training.findUnique({ ...options, include: { sets: true } });
+    return prisma.training.findUnique({
+      ...options,
+      include: {
+        sets: { include: { exercises: { include: { exercise: true } } } },
+      },
+    });
   }
   createTraining(training: Omit<Training, "id">): Promise<Training> {
     return prisma.training.create({

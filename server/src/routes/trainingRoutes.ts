@@ -31,7 +31,7 @@ trainingRouter.get("/training", async (_, res) => {
 
 trainingRouter.get("/training/:id", async (req, res) => {
   const id = Number(req.params.id);
-  const data = await trainingService.getDetailedById(id);
+  const data = await trainingService.getById(id);
 
   if (!data) return res.sendStatus(404);
 

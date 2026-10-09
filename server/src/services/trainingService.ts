@@ -34,7 +34,7 @@ export class TrainingService extends Service {
     return this.dbClient.createTraining(dataToCreate);
   }
 
-  async getAll() {
+  getAll() {
     return this.dbClient.findManyTrainings();
   }
 
