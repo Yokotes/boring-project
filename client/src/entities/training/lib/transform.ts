@@ -1,4 +1,4 @@
-import type { ListTraining, TrainingDTO } from "../model";
+import type { ListTraining, TrainingDTO, TrainingTableView } from "../model";
 
 const tranformToListItem = ({ id, title, sets }: TrainingDTO): ListTraining => {
   const exerciseIndexMap = new Map<number, number>();
@@ -33,4 +33,26 @@ export const transformToListTrainings = (
   trainings: TrainingDTO[],
 ): ListTraining[] => {
   return trainings.map(tranformToListItem);
+};
+
+export const transformTableView = (
+  training: TrainingDTO,
+): TrainingTableView => {
+  const headers = training.sets.map((_, index) => `Подход ${index + 1}`);
+  const listView = tranformToListItem(training);
+  const rows = listView.exercises.map((item) => {
+    return {
+      ...item,
+      reps: [...item.reps].map((val) => (val ? val.toString() : "-")),
+      totalReps: item.reps.reduce((acc, item) => acc + item, 0),
+    } as TrainingTableView["rows"][number];
+  });
+  const totalRepsArr = headers.map((_, index) => {
+    return listView.exercises.reduce((acc, item) => {
+      return acc + (item.reps[index] || 0);
+    }, 0);
+  });
+  const total = totalRepsArr.reduce((acc, item) => acc + item, 0);
+
+  return { title: training.title, headers, rows, totalRepsArr, total };
 };

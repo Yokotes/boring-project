@@ -30,18 +30,9 @@ const Title = ({ children }: { children: string }) => {
   );
 };
 
-const Reps = ({ children }: PropsWithChildren) => {
-  return (
-    <span className={styles.reps} title="Подходы и повторения">
-      {children}
-    </span>
-  );
-};
-
 export const TrainingCardExerciseLayout = Object.assign(Layout, {
   ImageWrapper,
   Placeholder,
   Image,
   Title,
-  Reps,
 });

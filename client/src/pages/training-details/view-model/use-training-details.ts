@@ -1,4 +1,5 @@
 import { getTrainingByIdQueryFn } from "@/entities/training/api";
+import { transformTableView } from "@/entities/training/lib";
 import { useQuery } from "@tanstack/react-query";
 
 export const useTrainingDetails = (id: number) => {
@@ -8,5 +9,8 @@ export const useTrainingDetails = (id: number) => {
     queryFn: getTrainingByIdQueryFn,
   });
 
-  return { training };
+  return {
+    title: training?.title,
+    tableView: training ? transformTableView(training) : null,
+  };
 };

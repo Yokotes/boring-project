@@ -42,6 +42,21 @@ export interface ListTraining {
   exercises: ExerciseWithRepsArray[];
 }
 
+export interface TrainingTableView {
+  title: string;
+  headers: string[];
+  rows: {
+    id: number;
+    title: string;
+    imageUrl?: string;
+    description: string;
+    reps: string[];
+    totalReps: number;
+  }[];
+  totalRepsArr: number[];
+  total: number;
+}
+
 // FORM FIELDS
 interface ExerciseFields {
   id: number;

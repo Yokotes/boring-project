@@ -1,4 +1,5 @@
 import { Show } from "@/shared/ui/show";
+import { Chip } from "@/shared/ui/chip";
 import { formatReps } from "@/entities/training/lib";
 import { TrainingCardExerciseLayout } from "./training-card-exercise-layout";
 
@@ -24,9 +25,7 @@ export const TrainingCardExercise = ({
       <TrainingCardExerciseLayout.Title>
         {title}
       </TrainingCardExerciseLayout.Title>
-      <TrainingCardExerciseLayout.Reps>
-        {formatReps(reps)}
-      </TrainingCardExerciseLayout.Reps>
+      <Chip title="Подходы и повторения">{formatReps(reps)}</Chip>
     </TrainingCardExerciseLayout>
   );
 };
